@@ -1,13 +1,11 @@
-import { AppProps, Container } from 'next/app'
-import Page from '../components/Page'
+import { AppProps } from 'next/app'
+import Page from '@components/Page'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <Container>
-      <Page>
-        <Component {...pageProps} />
-      </Page>
-    </Container>
+    <Page>
+      <Component {...pageProps} />
+    </Page>
   )
 }
 
