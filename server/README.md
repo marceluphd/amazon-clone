@@ -4,5 +4,5 @@
 
 - Apollo Server
 - TypeGraphQL
-- Prisma
+- TypeORM
 - Jest
