@@ -1,5 +1,5 @@
 # amazon-clone
-
+![](https://i.insider.com/539f3ffbecad044276726c01?width=1100&format=jpeg&auto=webp)
 Fullstack amazon clone
 
 ## Frontend
