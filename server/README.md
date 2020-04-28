@@ -3,6 +3,6 @@
 ## Stack
 
 - Apollo Server
-- GraphQL Nexus
+- TypeGraphQL
 - Prisma
 - Jest
