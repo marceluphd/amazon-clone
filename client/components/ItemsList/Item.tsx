@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { formatMoney } from 'utils'
-import ItemButtons from './ItemButtons'
+import { ItemsData_items } from 'generated/ItemsData'
 
 const StyledItem = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.grey};
@@ -15,7 +15,7 @@ const Price = styled.p`
 `
 
 interface ItemProps {
-  item: any
+  item: ItemsData_items
 }
 
 const Item = (props: ItemProps) => {
@@ -35,7 +35,6 @@ const Item = (props: ItemProps) => {
         </Link>
       </Title>
       <Price>{formatMoney(item.price)}</Price>
-      <p>{item.description}</p>
     </StyledItem>
   )
 }

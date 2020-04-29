@@ -2,12 +2,14 @@ import React from 'react'
 import { useQuery, gql } from '@apollo/client'
 import styled from 'styled-components'
 import Item from './Item'
+import { ItemsData, ItemsData_items } from 'generated/ItemsData'
 
 const FETCH_ALL_ITEMS = gql`
-  {
+  query ItemsData {
     items {
       id
       title
+      description
       price
       image
       largeImage
@@ -28,15 +30,15 @@ const StyledItemsList = styled.div`
 `
 
 const ItemsList = () => {
-  const { loading, error, data } = useQuery(FETCH_ALL_ITEMS)
+  const { loading, error, data } = useQuery<ItemsData>(FETCH_ALL_ITEMS)
 
-  if (loading) return <p>Loading...</p>
+  if (loading || !data) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
 
   return (
     <Center>
       <StyledItemsList>
-        {data.items.map((item: any) => (
+        {data.items.map((item: ItemsData_items) => (
           <Item key={item.id} item={item} />
         ))}
       </StyledItemsList>
