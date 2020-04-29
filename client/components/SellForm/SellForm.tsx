@@ -25,7 +25,7 @@ const SellForm = () => {
     price: 300,
   })
 
-  const [createItem, { loading, error }] = useMutation<CreateItem>(
+  const [createItem, { loading, error, data }] = useMutation<CreateItem>(
     CREATE_ITEM_MUTATION
   )
 
@@ -42,11 +42,14 @@ const SellForm = () => {
   const submitForm = async (e: FormEvent) => {
     e.preventDefault()
 
-    const res = await createItem({ variables: { input: itemData } })
+    createItem({ variables: { input: itemData } })
+  }
+
+  if (data) {
     Router.push({
       pathname: '/item',
       query: {
-        id: res.data.createItem.id,
+        id: data.createItem.id,
       },
     })
   }
