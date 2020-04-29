@@ -23,7 +23,7 @@ const Item = (props: ItemProps) => {
 
   return (
     <StyledItem>
-      {/* {item.image && <img src={item.image} alt={item.title} />} */}
+      {item.image && <img src={item.image} alt={item.title} />}
       <Title>
         <Link
           href={{

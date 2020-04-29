@@ -29,6 +29,29 @@ const SellForm = () => {
     CREATE_ITEM_MUTATION
   )
 
+  const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    const data = new FormData()
+    data.append('file', files![0])
+    data.append('upload_preset', 'amazon-clone') // upload_preset required by cloudinary
+
+    const res = await fetch(
+      'https://api.cloudinary.com/v1_1/jeffzh4ng/image/upload',
+      {
+        method: 'POST',
+        body: data,
+      }
+    )
+
+    const file = await res.json()
+
+    setItemData((oldItemData) => ({
+      ...oldItemData,
+      image: file.secure_url,
+      largeImage: file.eager[0].secure_url,
+    }))
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, type, value } = e.target
     const val = type === 'number' ? parseFloat(value) : value
@@ -61,6 +84,19 @@ const SellForm = () => {
       {error && <Error error={error.message} />}
 
       <fieldset disabled={loading} aria-busy={loading}>
+        <label htmlFor="file">
+          File
+          <input
+            type="file"
+            id="file"
+            name="file"
+            placeholder="Upload an image"
+            onChange={uploadFile}
+            required
+          />
+          {itemData.image && <img src={itemData.image} alt={itemData.title} />}
+        </label>
+
         <label htmlFor="title">
           Title
           <input
@@ -80,7 +116,7 @@ const SellForm = () => {
             type="number"
             id="price"
             name="price"
-            placeholder="price"
+            placeholder="Price"
             value={itemData.price}
             onChange={handleChange}
             required
@@ -93,7 +129,7 @@ const SellForm = () => {
             type="text"
             id="description"
             name="description"
-            placeholder="description"
+            placeholder="Description"
             value={itemData.description}
             onChange={handleChange}
             required
