@@ -1,7 +1,7 @@
 // import original module declarations
 import 'styled-components'
 // import your custom theme
-import { theme } from '@utils/theme'
+import { theme } from '@utils'
 
 // extend the module declarations using custom theme type
 

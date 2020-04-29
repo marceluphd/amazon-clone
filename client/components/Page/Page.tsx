@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import styled, { ThemeProvider, createGlobalStyle } from 'styled-components'
-import { theme } from '@utils/theme'
+import { theme } from 'utils'
 
 import Header from './Header'
 import Meta from './Meta'
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  html {
     box-sizing: border-box;
     font-size: 10px;
   }
@@ -35,7 +35,6 @@ const StyledPage = styled.div`
 `
 
 const Inner = styled.div`
-  background: ${(props) => props.theme.orange};
   margin: 0 auto;
   max-width: ${(props) => props.theme.maxWidth};
   padding: 2rem;

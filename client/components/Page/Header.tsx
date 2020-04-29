@@ -4,26 +4,26 @@ import styled from 'styled-components'
 
 const StyledHeader = styled.header`
   background: ${(props) => props.theme.navy};
+`
 
-  .content {
-    align-items: center;
-    justify-content: space-between;
-    display: flex;
+const StyledHeaderContent = styled.div`
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
 
-    a {
-      color: ${(props) => props.theme.white};
-      font-size: 2rem;
-    }
+  a {
+    color: ${(props) => props.theme.white};
+    font-size: 2rem;
+  }
 
-    p {
-      color: ${(props) => props.theme.white};
-    }
+  p {
+    color: ${(props) => props.theme.white};
   }
 `
 
 const Header = () => (
   <StyledHeader>
-    <div className="content">
+    <StyledHeaderContent>
       <h1>
         <Link href="/">
           <a>amazon</a>
@@ -31,7 +31,7 @@ const Header = () => (
       </h1>
       <p>Search</p>
       <p>Cart</p>
-    </div>
+    </StyledHeaderContent>
 
     <Nav />
   </StyledHeader>

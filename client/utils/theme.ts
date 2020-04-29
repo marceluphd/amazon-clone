@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   black: '#111111',
   grey: '#ccc',
   maxWidth: '1000px',
@@ -6,3 +6,5 @@ export const theme = {
   navy: '#242F3E',
   white: '#fff',
 }
+
+export default theme

@@ -1,5 +1,8 @@
-const Home = () => {
-  return <p>Home</p>
-}
+import { ItemsList } from 'components'
 
+const Home = () => (
+  <div>
+    <ItemsList />
+  </div>
+)
 export default Home

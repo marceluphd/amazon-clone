@@ -2,14 +2,11 @@
   "presets": [["next/babel"]],
   "plugins": [
     [
-      "module-resolver",
+      "styled-components",
       {
-        "root": ["./"],
-        "alias": {
-          "@components": "./components",
-          "@pages": "./pages",
-          "@utils": "./utils"
-        }
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
       }
     ]
   ]
