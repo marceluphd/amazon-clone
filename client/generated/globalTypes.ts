@@ -7,6 +7,14 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface CreateItemInput {
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  largeImage: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

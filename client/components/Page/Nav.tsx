@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const StyledNav = styled.div`
   display: flex;
-  font-size: 1rem;
   justify-content: center;
 
   a {

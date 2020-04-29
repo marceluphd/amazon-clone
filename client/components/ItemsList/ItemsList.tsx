@@ -4,6 +4,18 @@ import styled from 'styled-components'
 import Item from './Item'
 import { ItemsData, ItemsData_items } from 'generated/ItemsData'
 
+const Center = styled.div`
+  text-align: center;
+`
+
+const StyledItemsList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 60px;
+  margin: 0 auto;
+  max-width: ${(props) => props.theme.maxWidth};
+`
+
 const FETCH_ALL_ITEMS = gql`
   query ItemsData {
     items {
@@ -15,18 +27,6 @@ const FETCH_ALL_ITEMS = gql`
       largeImage
     }
   }
-`
-
-const Center = styled.div`
-  text-align: center;
-`
-
-const StyledItemsList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 60px;
-  margin: 0 auto;
-  max-width: ${(props) => props.theme.maxWidth};
 `
 
 const ItemsList = () => {

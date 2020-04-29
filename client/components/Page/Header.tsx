@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 const StyledHeader = styled.header`
   background: ${(props) => props.theme.navy};
+  font-size: 1.8rem;
 `
 
 const StyledHeaderContent = styled.div`
@@ -13,7 +14,6 @@ const StyledHeaderContent = styled.div`
 
   a {
     color: ${(props) => props.theme.white};
-    font-size: 2rem;
   }
 
   p {

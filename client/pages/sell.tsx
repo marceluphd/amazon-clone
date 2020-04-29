@@ -1,5 +1,7 @@
+import { SellForm } from 'components'
+
 const Sell = () => {
-  return <p>Sell</p>
+  return <SellForm />
 }
 
 export default Sell
