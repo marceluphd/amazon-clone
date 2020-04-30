@@ -37,8 +37,8 @@ class UpdateItemInput extends CreateItemInput {
 
 @Resolver()
 class ItemResolver {
-  @Query((returns) => Item)
-  async item(@Arg('id') id: string): Promise<Item> {
+  @Query((returns) => Item, { nullable: true })
+  async item(@Arg('id') id: string): Promise<Item | null> {
     return await Item.findOne(id)
   }
 

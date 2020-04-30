@@ -2,23 +2,11 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import UpdateForm from './UpdateForm'
 import { Error } from 'components'
+import { FETCH_ONE_ITEM_QUERY } from 'queries'
 import {
   FindOneItemQuery,
   FindOneItemQueryVariables,
 } from 'generated/FindOneItemQuery'
-
-const FETCH_ONE_ITEM_QUERY = gql`
-  query FindOneItemQuery($id: String!) {
-    item(id: $id) {
-      id
-      title
-      description
-      price
-      image
-      largeImage
-    }
-  }
-`
 
 interface UpdateFormLoaderProps {
   itemId: string
