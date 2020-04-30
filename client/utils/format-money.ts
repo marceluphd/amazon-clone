@@ -8,7 +8,7 @@ const formatMoney = (amount: number) => {
   if (amount % 100 === 0) options.minimumFractionDigits = 0
 
   const formatter = new Intl.NumberFormat('en-US', options)
-  return formatter.format(amount / 100)
+  return formatter.format(amount)
 }
 
 export default formatMoney

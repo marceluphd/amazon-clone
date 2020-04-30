@@ -30,8 +30,8 @@ const UpdateForm = (props: UpdateFormProps) => {
   const [updateItemData, setUpdateItemData] = useState({
     title: loadedItem.title,
     description: loadedItem.description,
-    image: '',
-    largeImage: '',
+    image: loadedItem.image,
+    largeImage: loadedItem.largeImage,
     price: loadedItem.price,
   })
 

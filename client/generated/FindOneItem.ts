@@ -13,6 +13,8 @@ export interface FindOneItem_item {
   title: string;
   description: string;
   price: number;
+  image: string;
+  largeImage: string;
 }
 
 export interface FindOneItem {
