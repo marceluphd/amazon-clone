@@ -15,6 +15,15 @@ export interface CreateItemInput {
   largeImage: string;
 }
 
+export interface UpdateItemInput {
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  largeImage: string;
+  id: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

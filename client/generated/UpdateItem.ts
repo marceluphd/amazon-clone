@@ -3,20 +3,24 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
+import { UpdateItemInput } from "./globalTypes";
+
 // ====================================================
-// GraphQL query operation: ItemsData
+// GraphQL mutation operation: UpdateItem
 // ====================================================
 
-export interface ItemsData_items {
+export interface UpdateItem_updateItem {
   __typename: "Item";
   id: string;
   title: string;
   description: string;
   price: number;
-  image: string;
-  largeImage: string;
 }
 
-export interface ItemsData {
-  items: ItemsData_items[];
+export interface UpdateItem {
+  updateItem: UpdateItem_updateItem;
+}
+
+export interface UpdateItemVariables {
+  input: UpdateItemInput;
 }

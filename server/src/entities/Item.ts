@@ -1,10 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm'
-import { ObjectType, Field, Float } from 'type-graphql'
+import { ObjectType, Field, Float, ID } from 'type-graphql'
 
 @ObjectType()
 @Entity()
 class Item extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @Field((type) => ID)
+  @PrimaryGeneratedColumn('uuid')
   id: number
 
   @Field()

@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 const StyledItemButtons = styled.div``
 
-interface Props {
+interface ItemButtonsProps {
   itemId: number
 }
 
-const ItemButtons = (props: Props) => (
+const ItemButtons = (props: ItemButtonsProps) => (
   <StyledItemButtons>
     <Link
       href={{

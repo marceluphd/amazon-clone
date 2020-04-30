@@ -4,30 +4,49 @@ import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import { Error } from 'components'
 import Router from 'next/router'
-import { CreateItem } from 'generated/CreateItem'
+import { UpdateItem, UpdateItemVariables } from 'generated/UpdateItem'
+import { FindOneItem_item } from 'generated/FindOneItem'
 
 const StyledForm = styled.form``
 
-const CREATE_ITEM_MUTATION = gql`
-  mutation CreateItem($input: CreateItemInput!) {
-    createItem(input: $input) {
+const UPDATE_ITEM_MUTATION = gql`
+  mutation UpdateItem($input: UpdateItemInput!) {
+    updateItem(input: $input) {
       id
+      title
+      description
+      price
     }
   }
 `
 
-const SellForm = () => {
-  const [itemData, setItemData] = useState({
-    title: 'Air jordans',
-    description: 'A clean pair of sneakers',
-    image: 'jordan.jpg',
-    largeImage: 'jordan.jpg',
-    price: 300,
+interface UpdateFormProps {
+  loadedItem: FindOneItem_item
+}
+
+const UpdateForm = (props: UpdateFormProps) => {
+  const { loadedItem } = props
+
+  const [updateItemData, setUpdateItemData] = useState({
+    title: loadedItem.title,
+    description: loadedItem.description,
+    image: '',
+    largeImage: '',
+    price: loadedItem.price,
   })
 
-  const [createItem, { loading, error, data }] = useMutation<CreateItem>(
-    CREATE_ITEM_MUTATION
-  )
+  const [updateItem, { loading, error, data }] = useMutation<
+    UpdateItem,
+    UpdateItemVariables
+  >(UPDATE_ITEM_MUTATION)
+  if (data) {
+    Router.push({
+      pathname: '/item',
+      query: {
+        id: data.updateItem.id,
+      },
+    })
+  }
 
   const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files
@@ -45,7 +64,7 @@ const SellForm = () => {
 
     const file = await res.json()
 
-    setItemData((oldItemData) => ({
+    setUpdateItemData((oldItemData) => ({
       ...oldItemData,
       image: file.secure_url,
       largeImage: file.eager[0].secure_url,
@@ -56,7 +75,7 @@ const SellForm = () => {
     const { name, type, value } = e.target
     const val = type === 'number' ? parseFloat(value) : value
 
-    setItemData((oldItemData) => ({
+    setUpdateItemData((oldItemData) => ({
       ...oldItemData,
       [name]: val,
     }))
@@ -64,16 +83,8 @@ const SellForm = () => {
 
   const submitForm = async (e: FormEvent) => {
     e.preventDefault()
-
-    createItem({ variables: { input: itemData } })
-  }
-
-  if (data) {
-    Router.push({
-      pathname: '/item',
-      query: {
-        id: data.createItem.id,
-      },
+    updateItem({
+      variables: { input: { id: loadedItem.id, ...updateItemData } },
     })
   }
 
@@ -92,9 +103,10 @@ const SellForm = () => {
             name="file"
             placeholder="Upload an image"
             onChange={uploadFile}
-            required
           />
-          {itemData.image && <img src={itemData.image} alt={itemData.title} />}
+          {updateItemData.image && (
+            <img src={updateItemData.image} alt={updateItemData.title} />
+          )}
         </label>
 
         <label htmlFor="title">
@@ -104,7 +116,7 @@ const SellForm = () => {
             id="title"
             name="title"
             placeholder="Title"
-            value={itemData.title}
+            value={updateItemData.title}
             onChange={handleChange}
             required
           />
@@ -117,7 +129,7 @@ const SellForm = () => {
             id="price"
             name="price"
             placeholder="Price"
-            value={itemData.price}
+            value={updateItemData.price}
             onChange={handleChange}
             required
           />
@@ -130,16 +142,16 @@ const SellForm = () => {
             id="description"
             name="description"
             placeholder="Description"
-            value={itemData.description}
+            value={updateItemData.description}
             onChange={handleChange}
             required
           />
         </label>
 
-        <button type="submit">Submit</button>
+        <button type="submit">Save changes</button>
       </fieldset>
     </StyledForm>
   )
 }
 
-export default SellForm
+export default UpdateForm

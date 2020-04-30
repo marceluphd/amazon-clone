@@ -11,7 +11,7 @@ import { CreateItemInput } from "./globalTypes";
 
 export interface CreateItem_createItem {
   __typename: "Item";
-  id: number;
+  id: string;
 }
 
 export interface CreateItem {

@@ -11,7 +11,7 @@ const main = async () => {
     resolvers: [ItemResolver],
   })
 
-  const server = new ApolloServer({ schema })
+  const server = new ApolloServer({ schema, cors: true })
   server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`)
   })

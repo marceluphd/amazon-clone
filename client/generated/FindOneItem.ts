@@ -4,19 +4,21 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ItemsData
+// GraphQL query operation: FindOneItem
 // ====================================================
 
-export interface ItemsData_items {
+export interface FindOneItem_item {
   __typename: "Item";
   id: string;
   title: string;
   description: string;
   price: number;
-  image: string;
-  largeImage: string;
 }
 
-export interface ItemsData {
-  items: ItemsData_items[];
+export interface FindOneItem {
+  item: FindOneItem_item;
+}
+
+export interface FindOneItemVariables {
+  id: string;
 }

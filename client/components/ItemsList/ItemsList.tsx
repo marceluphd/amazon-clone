@@ -16,7 +16,7 @@ const StyledItemsList = styled.div`
   max-width: ${(props) => props.theme.maxWidth};
 `
 
-const FETCH_ALL_ITEMS = gql`
+const FETCH_ALL_ITEMS_QUERY = gql`
   query ItemsData {
     items {
       id
@@ -30,7 +30,7 @@ const FETCH_ALL_ITEMS = gql`
 `
 
 const ItemsList = () => {
-  const { loading, error, data } = useQuery<ItemsData>(FETCH_ALL_ITEMS)
+  const { loading, error, data } = useQuery<ItemsData>(FETCH_ALL_ITEMS_QUERY)
 
   if (loading || !data) return <p>Loading...</p>
   if (error) return <p>Error :(</p>

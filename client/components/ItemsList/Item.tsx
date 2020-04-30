@@ -35,6 +35,17 @@ const Item = (props: ItemProps) => {
         </Link>
       </Title>
       <Price>{formatMoney(item.price)}</Price>
+
+      <div className="buttonList">
+        <Link
+          href={{
+            pathname: 'update',
+            query: { id: item.id },
+          }}
+        >
+          <a>Edit</a>
+        </Link>
+      </div>
     </StyledItem>
   )
 }
