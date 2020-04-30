@@ -3,24 +3,24 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { UpdateItemInput } from "./globalTypes";
-
 // ====================================================
-// GraphQL mutation operation: UpdateItem
+// GraphQL query operation: FindOneItemQuery
 // ====================================================
 
-export interface UpdateItem_updateItem {
+export interface FindOneItemQuery_item {
   __typename: "Item";
   id: string;
   title: string;
   description: string;
   price: number;
+  image: string;
+  largeImage: string;
 }
 
-export interface UpdateItem {
-  updateItem: UpdateItem_updateItem;
+export interface FindOneItemQuery {
+  item: FindOneItemQuery_item;
 }
 
-export interface UpdateItemVariables {
-  input: UpdateItemInput;
+export interface FindOneItemQueryVariables {
+  id: string;
 }

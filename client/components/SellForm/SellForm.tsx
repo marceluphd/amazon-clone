@@ -4,12 +4,12 @@ import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import { Error } from 'components'
 import Router from 'next/router'
-import { CreateItem } from 'generated/CreateItem'
+import { CreateItemMutation } from 'generated/CreateItemMutation'
 
 const StyledForm = styled.form``
 
 const CREATE_ITEM_MUTATION = gql`
-  mutation CreateItem($input: CreateItemInput!) {
+  mutation CreateItemMutation($input: CreateItemInput!) {
     createItem(input: $input) {
       id
     }
@@ -25,9 +25,9 @@ const SellForm = () => {
     price: 300,
   })
 
-  const [createItem, { loading, error, data }] = useMutation<CreateItem>(
-    CREATE_ITEM_MUTATION
-  )
+  const [createItem, { loading, error, data }] = useMutation<
+    CreateItemMutation
+  >(CREATE_ITEM_MUTATION)
 
   const uploadFile = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files

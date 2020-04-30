@@ -4,13 +4,16 @@ import { useMutation } from '@apollo/client'
 import styled from 'styled-components'
 import { Error } from 'components'
 import Router from 'next/router'
-import { UpdateItem, UpdateItemVariables } from 'generated/UpdateItem'
-import { FindOneItem_item } from 'generated/FindOneItem'
+import {
+  UpdateItemMutation,
+  UpdateItemMutationVariables,
+} from 'generated/UpdateItemMutation'
+import { FindOneItemQuery_item } from 'generated/FindOneItemQuery'
 
 const StyledForm = styled.form``
 
 const UPDATE_ITEM_MUTATION = gql`
-  mutation UpdateItem($input: UpdateItemInput!) {
+  mutation UpdateItemMutation($input: UpdateItemInput!) {
     updateItem(input: $input) {
       id
       title
@@ -21,7 +24,7 @@ const UPDATE_ITEM_MUTATION = gql`
 `
 
 interface UpdateFormProps {
-  loadedItem: FindOneItem_item
+  loadedItem: FindOneItemQuery_item
 }
 
 const UpdateForm = (props: UpdateFormProps) => {
@@ -36,8 +39,8 @@ const UpdateForm = (props: UpdateFormProps) => {
   })
 
   const [updateItem, { loading, error, data }] = useMutation<
-    UpdateItem,
-    UpdateItemVariables
+    UpdateItemMutation,
+    UpdateItemMutationVariables
   >(UPDATE_ITEM_MUTATION)
   if (data) {
     Router.push({

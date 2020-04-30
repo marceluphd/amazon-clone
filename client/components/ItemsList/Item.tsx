@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { formatMoney } from 'utils'
-import { ItemsData_items } from 'generated/ItemsData'
+import { FetchAllItemsQuery_items } from 'generated/FetchAllItemsQuery'
+import ItemButtons from './ItemButtons'
 
 const StyledItem = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.grey};
@@ -15,7 +16,7 @@ const Price = styled.p`
 `
 
 interface ItemProps {
-  item: ItemsData_items
+  item: FetchAllItemsQuery_items
 }
 
 const Item = (props: ItemProps) => {
@@ -31,21 +32,12 @@ const Item = (props: ItemProps) => {
             query: { id: item.id },
           }}
         >
-          {item.title}
+          <a>{item.title}</a>
         </Link>
       </Title>
       <Price>{formatMoney(item.price)}</Price>
 
-      <div className="buttonList">
-        <Link
-          href={{
-            pathname: 'update',
-            query: { id: item.id },
-          }}
-        >
-          <a>Edit</a>
-        </Link>
-      </div>
+      <ItemButtons itemId={item.id} />
     </StyledItem>
   )
 }

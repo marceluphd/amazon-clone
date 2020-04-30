@@ -68,6 +68,19 @@ class ItemResolver {
     await Item.update(id, updateItemData)
     return await Item.findOne(id)
   }
+
+  @Mutation((returns) => Item)
+  async deleteItem(@Arg('id') id: string): Promise<Item> {
+    // 1. find the item
+    const item = await Item.findOne(id)
+
+    // 2. check if they have permissions
+    // TODO
+
+    // 3. delete
+    await Item.delete(id)
+    return item
+  }
 }
 
 export default ItemResolver

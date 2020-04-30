@@ -4,19 +4,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ItemsData
+// GraphQL mutation operation: DeleteItemMutation
 // ====================================================
 
-export interface ItemsData_items {
+export interface DeleteItemMutation_deleteItem {
   __typename: "Item";
   id: string;
-  title: string;
-  description: string;
-  price: number;
-  image: string;
-  largeImage: string;
 }
 
-export interface ItemsData {
-  items: ItemsData_items[];
+export interface DeleteItemMutation {
+  deleteItem: DeleteItemMutation_deleteItem;
+}
+
+export interface DeleteItemMutationVariables {
+  id: string;
 }

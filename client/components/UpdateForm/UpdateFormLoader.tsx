@@ -2,10 +2,13 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/client'
 import UpdateForm from './UpdateForm'
 import { Error } from 'components'
-import { FindOneItem, FindOneItemVariables } from 'generated/FindOneItem'
+import {
+  FindOneItemQuery,
+  FindOneItemQueryVariables,
+} from 'generated/FindOneItemQuery'
 
 const FETCH_ONE_ITEM_QUERY = gql`
-  query FindOneItem($id: String!) {
+  query FindOneItemQuery($id: String!) {
     item(id: $id) {
       id
       title
@@ -22,14 +25,14 @@ interface UpdateFormLoaderProps {
 }
 
 const UpdateFormLoader = ({ itemId }: UpdateFormLoaderProps) => {
-  const { loading, error, data } = useQuery<FindOneItem, FindOneItemVariables>(
-    FETCH_ONE_ITEM_QUERY,
-    {
-      variables: {
-        id: itemId,
-      },
-    }
-  )
+  const { loading, error, data } = useQuery<
+    FindOneItemQuery,
+    FindOneItemQueryVariables
+  >(FETCH_ONE_ITEM_QUERY, {
+    variables: {
+      id: itemId,
+    },
+  })
 
   if (loading) return <p>Loading...</p>
   if (error) return <Error error={error} />
