@@ -9,17 +9,21 @@ import {
   Query,
 } from 'type-graphql'
 import { User } from '../entities'
-import * as bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs'
+import { Length, IsEmail } from 'class-validator'
 
 @InputType()
 class CreateUserInput implements Partial<User> {
   @Field()
+  @Length(1, 255)
   firstName: string
 
   @Field()
+  @Length(1, 255)
   lastName: string
 
   @Field()
+  @IsEmail()
   email: string
 
   @Field()
@@ -41,6 +45,7 @@ class UserResolver {
 
     const user = await User.create({
       ...createUserInput,
+      email: createUserInput.email.toLowerCase(),
       password: hashedPassword,
     }).save()
 
