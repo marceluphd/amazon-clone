@@ -9,7 +9,6 @@ import {
   ID,
 } from 'type-graphql'
 import { Item } from '../entities'
-import { getRepository } from 'typeorm'
 
 @InputType()
 class CreateItemInput implements Partial<Item> {
@@ -35,7 +34,7 @@ class UpdateItemInput extends CreateItemInput {
   id: number
 }
 
-@Resolver()
+@Resolver(Item)
 class ItemResolver {
   @Query((returns) => Item, { nullable: true })
   async item(@Arg('id') id: string): Promise<Item | null> {
