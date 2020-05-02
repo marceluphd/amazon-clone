@@ -6,11 +6,12 @@ import {
   Arg,
   FieldResolver,
   Root,
-  Query,
+  Ctx,
 } from 'type-graphql'
-import { User } from '../entities'
+import { User } from '../../entities'
 import bcrypt from 'bcryptjs'
 import { Length, IsEmail } from 'class-validator'
+import { Context } from '../../types'
 
 @InputType()
 class CreateUserInput implements Partial<User> {
@@ -31,15 +32,16 @@ class CreateUserInput implements Partial<User> {
 }
 
 @Resolver(User)
-class UserResolver {
+class SignupResolver {
   @FieldResolver()
   async fullName(@Root() parent: User): Promise<string> {
     return `${parent.firstName} ${parent.lastName}`
   }
 
   @Mutation((returns) => User)
-  async signupUser(
-    @Arg('input') createUserInput: CreateUserInput
+  async signup(
+    @Arg('input') createUserInput: CreateUserInput,
+    @Ctx() ctx: Context
   ): Promise<User> {
     const hashedPassword = await bcrypt.hash(createUserInput.password, 12)
 
@@ -49,8 +51,10 @@ class UserResolver {
       password: hashedPassword,
     }).save()
 
+    ctx.req.session.userId = user.id
+
     return user
   }
 }
 
-export default UserResolver
+export default SignupResolver
