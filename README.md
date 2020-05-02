@@ -16,4 +16,6 @@ Fullstack amazon clone
 - Apollo Server
 - TypeGraphQL
 - TypeORM
+- PostgreSQL
+- Redis
 - Jest
