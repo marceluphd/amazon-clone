@@ -5,4 +5,6 @@
 - Apollo Server
 - TypeGraphQL
 - TypeORM
+- PostgreSQL
+- Redis
 - Jest
