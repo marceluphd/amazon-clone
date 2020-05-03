@@ -21,16 +21,6 @@ const MyApp = ({
   </ApolloProvider>
 )
 
-// TODO: uncomment if it turns out that withApollo does not pass query data
-// to <MyApp />
-
-// MyApp.getInitialProps = async (appContext: NextPageContext): Promise<any> => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await MyApp.getInitialProps(appContext)
-
-//   return { ...appProps }
-// }
-
 export default withApollo(({ initialState, headers }) => {
   return new ApolloClient({
     cache: new InMemoryCache().restore(initialState || {}),

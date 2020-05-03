@@ -7,6 +7,7 @@ import {
   FetchAllItemsQuery_items,
 } from 'generated/FetchAllItemsQuery'
 import { FETCH_ALL_ITEMS_QUERY } from 'queries'
+import { Pagination } from 'components'
 
 const Center = styled.div`
   text-align: center;
@@ -30,11 +31,13 @@ const ItemsList = () => {
 
   return (
     <Center>
+      <Pagination />
       <StyledItemsList>
         {data.items.map((item: FetchAllItemsQuery_items) => (
           <Item key={item.id} item={item} />
         ))}
       </StyledItemsList>
+      <Pagination />
     </Center>
   )
 }

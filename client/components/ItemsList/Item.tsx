@@ -8,6 +8,10 @@ const StyledItem = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.grey};
 `
 
+const StyledImage = styled.img`
+  height: 12rem;
+`
+
 const Title = styled.p``
 
 const Price = styled.p`
@@ -24,7 +28,7 @@ const Item = (props: ItemProps) => {
 
   return (
     <StyledItem>
-      {item.image && <img src={item.image} alt={item.title} />}
+      {item.image && <StyledImage src={item.image} alt={item.title} />}
       <Title>
         <Link
           href={{

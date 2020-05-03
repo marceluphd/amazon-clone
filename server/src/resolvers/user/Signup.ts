@@ -14,7 +14,7 @@ import { Length, IsEmail } from 'class-validator'
 import { Context } from '../../types'
 
 @InputType()
-class CreateUserInput implements Partial<User> {
+class SignupInput implements Partial<User> {
   @Field()
   @Length(1, 255)
   firstName: string
@@ -40,7 +40,7 @@ class SignupResolver {
 
   @Mutation((returns) => User)
   async signup(
-    @Arg('input') createUserInput: CreateUserInput,
+    @Arg('input') createUserInput: SignupInput,
     @Ctx() ctx: Context
   ): Promise<User> {
     const hashedPassword = await bcrypt.hash(createUserInput.password, 12)
