@@ -45,7 +45,6 @@ class ItemResolver {
 
   @Query((returns) => [Item])
   async items(@Ctx() ctx: Context): Promise<Array<Item>> {
-    console.log(ctx.req.session)
     return await Item.find()
   }
 

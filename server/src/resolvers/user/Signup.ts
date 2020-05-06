@@ -10,12 +10,13 @@ import {
 } from 'type-graphql'
 import { User } from '../../entities'
 import bcrypt from 'bcryptjs'
-import { Length, IsEmail } from 'class-validator'
+import { Length, IsEmail, Min } from 'class-validator'
 import { Context } from '../../types'
 import { sendEmail, createConfirmationUrl } from '../../utils'
+import { PasswordInput } from '../shared'
 
 @InputType()
-class SignupInput implements Partial<User> {
+class SignupInput extends PasswordInput implements Partial<User> {
   @Field()
   @Length(1, 255)
   firstName: string
@@ -27,9 +28,6 @@ class SignupInput implements Partial<User> {
   @Field()
   @IsEmail()
   email: string
-
-  @Field()
-  password: string
 }
 
 @Resolver(User)
