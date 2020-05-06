@@ -21,7 +21,7 @@ class SigninResolver {
 
     const valid = bcrypt.compare(password, user.password)
 
-    if (!valid) return null
+    if (!valid || !user.confirmed) return null
 
     ctx.req.session.userId = user.id
 

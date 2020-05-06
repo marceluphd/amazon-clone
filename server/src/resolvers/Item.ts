@@ -7,8 +7,10 @@ import {
   Field,
   Int,
   ID,
+  Ctx,
 } from 'type-graphql'
 import { Item } from '../entities'
+import { Context } from '../types'
 
 @InputType()
 class CreateItemInput implements Partial<Item> {
@@ -42,7 +44,8 @@ class ItemResolver {
   }
 
   @Query((returns) => [Item])
-  async items(): Promise<Array<Item>> {
+  async items(@Ctx() ctx: Context): Promise<Array<Item>> {
+    console.log(ctx.req.session)
     return await Item.find()
   }
 

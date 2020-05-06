@@ -19,7 +19,7 @@ registerEnumType(Permission, {
 class User extends BaseEntity {
   @Field((type) => ID)
   @PrimaryGeneratedColumn('uuid')
-  id: number
+  id: string
 
   @Field()
   @Column()
@@ -40,7 +40,8 @@ class User extends BaseEntity {
   @Column()
   password: string
 
-  permissions: [Permission]
+  @Column('bool', { default: false })
+  confirmed: boolean
 }
 
 export default User

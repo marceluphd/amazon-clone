@@ -12,6 +12,7 @@ import { User } from '../../entities'
 import bcrypt from 'bcryptjs'
 import { Length, IsEmail } from 'class-validator'
 import { Context } from '../../types'
+import { sendEmail, createConfirmationUrl } from '../../utils'
 
 @InputType()
 class SignupInput implements Partial<User> {
@@ -52,6 +53,7 @@ class SignupResolver {
     }).save()
 
     ctx.req.session.userId = user.id
+    await sendEmail(user.email, await createConfirmationUrl(user.id))
 
     return user
   }

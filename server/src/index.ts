@@ -7,17 +7,34 @@ import {
   SignupResolver,
   SigninResolver,
   MeResolver,
+  ConfirmUserResolver,
 } from './resolvers'
 import Express from 'express'
 import session from 'express-session'
 import redisSession from './redis'
 import cors from 'cors'
 
+const corsOptions = {
+  credentials: true,
+  origin: 'http://localhost:3000',
+}
+
 const main = async () => {
   await createConnection()
 
   const schema = await buildSchema({
-    resolvers: [ItemResolver, SignupResolver, SigninResolver, MeResolver],
+    resolvers: [
+      ItemResolver,
+      SignupResolver,
+      SigninResolver,
+      MeResolver,
+      ConfirmUserResolver,
+    ],
+    authChecker: ({ context: { req } }) => {
+      if (req.session.userId) return true
+
+      return false
+    },
   })
 
   const server = new ApolloServer({
@@ -26,12 +43,7 @@ const main = async () => {
   })
 
   const app = Express()
-  app.use(
-    cors({
-      credentials: true,
-      origin: 'http://localhost:3000',
-    })
-  )
+  app.use('*', cors(corsOptions))
   app.use(session(redisSession))
 
   server.applyMiddleware({ app })
