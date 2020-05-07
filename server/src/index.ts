@@ -30,10 +30,10 @@ const main = async () => {
   })
 
   const app = Express()
-  app.use('*', cors(corsOptions))
+  app.use(cors(corsOptions))
   app.use(session(redisSession))
 
-  server.applyMiddleware({ app })
+  server.applyMiddleware({ app, cors: corsOptions })
   app.listen(4000, () => {
     console.log(`🚀 Server ready at http://localhost:4000/graphql`)
   })

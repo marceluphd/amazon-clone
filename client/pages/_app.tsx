@@ -29,7 +29,7 @@ export default withApollo(({ initialState, headers }) => {
         process.env.NODE_ENV === 'development'
           ? process.env.API_URL
           : process.env.API_URL,
-      credentials: 'same-origin',
+      credentials: 'include',
       headers,
     }),
   })

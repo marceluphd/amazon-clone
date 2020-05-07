@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import styled from 'styled-components'
+import User from './User'
 
 const StyledNav = styled.div`
   display: flex;
@@ -13,6 +14,7 @@ const StyledNav = styled.div`
 
 const Nav = () => (
   <StyledNav>
+    <User />
     <Link href="/">
       <a>Home</a>
     </Link>

@@ -42,6 +42,7 @@ class SignupResolver {
     @Arg('input') createUserInput: SignupInput,
     @Ctx() ctx: Context
   ): Promise<User> {
+    console.log
     const hashedPassword = await bcrypt.hash(createUserInput.password, 12)
 
     const user = await User.create({
