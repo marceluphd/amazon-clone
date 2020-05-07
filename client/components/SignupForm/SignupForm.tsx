@@ -29,17 +29,25 @@ const SignupForm = () => {
     }))
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    signUp({ variables: { input: formData } })
-  }
+    await signUp({ variables: { input: formData } })
 
-  if (error) return <Error error={error} />
+    // if signup is not successful, it will throw and exit the function
+    // we only set state when sign up was successful
+    setFormData({
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+    })
+  }
 
   return (
     <form method="post" onSubmit={handleSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
         <h2>Signup for an account</h2>
+        {error && <Error error={error} />}
         <label htmlFor="email">
           Email
           <input
