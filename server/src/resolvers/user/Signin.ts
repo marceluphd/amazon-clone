@@ -17,11 +17,14 @@ class SigninResolver {
       },
     })
 
+    console.log('USER', user)
+
     if (!user) return null // not giving information on the existence of users to clients
 
     const valid = await bcrypt.compare(password, user.password)
 
-    if (!valid || !user.confirmed) return null
+    if (!valid) return null
+    // if (!user.confirmed) return null
 
     ctx.req.session.userId = user.id
 

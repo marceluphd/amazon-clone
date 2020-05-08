@@ -3,23 +3,21 @@ import { gql, useMutation } from '@apollo/client'
 import { Error } from 'components'
 import { FETCH_CURRENT_USER_QUERY } from 'queries'
 
-const SIGNUP_MUTATION = gql`
-  mutation SignupMutation($input: SignupInput!) {
-    signup(input: $input) {
+const SIGNIN_MUTATION = gql`
+  mutation SigninMutation($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
       id
     }
   }
 `
 
-const SignupForm = () => {
+const SigninForm = () => {
   const [formData, setFormData] = useState({
     email: '',
-    firstName: '',
-    lastName: '',
     password: '',
   })
 
-  const [signUp, { error, loading }] = useMutation(SIGNUP_MUTATION, {
+  const [signIn, { error, loading, data }] = useMutation(SIGNIN_MUTATION, {
     refetchQueries: [
       {
         query: FETCH_CURRENT_USER_QUERY,
@@ -38,14 +36,13 @@ const SignupForm = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    await signUp({ variables: { input: formData } })
+    console.log(formData)
+    await signIn({ variables: formData })
 
     // if signup is not successful, it will throw and exit the function
     // we only set state when sign up was successful
     setFormData({
       email: '',
-      firstName: '',
-      lastName: '',
       password: '',
     })
   }
@@ -53,7 +50,7 @@ const SignupForm = () => {
   return (
     <form method="post" onSubmit={handleSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Signup for an account</h2>
+        <h2>Sign into your account</h2>
         {error && <Error error={error} />}
         <label htmlFor="email">
           Email
@@ -62,28 +59,6 @@ const SignupForm = () => {
             name="email"
             placeholder="email"
             value={formData.email}
-            onChange={handleChange}
-            id=""
-          />
-        </label>
-        <label htmlFor="firstName">
-          First name
-          <input
-            type="text"
-            name="firstName"
-            placeholder="firstName"
-            value={formData.firstName}
-            onChange={handleChange}
-            id=""
-          />
-        </label>
-        <label htmlFor="lastName">
-          Last name
-          <input
-            type="text"
-            name="lastName"
-            placeholder="lastName"
-            value={formData.lastName}
             onChange={handleChange}
             id=""
           />
@@ -99,10 +74,10 @@ const SignupForm = () => {
             id=""
           />
         </label>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Sign In</button>
       </fieldset>
     </form>
   )
 }
 
-export default SignupForm
+export default SigninForm

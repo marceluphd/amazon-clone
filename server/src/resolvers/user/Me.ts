@@ -6,8 +6,6 @@ import { User } from '../../entities'
 class MeResolver {
   @Query(() => User, { nullable: true })
   async me(@Ctx() ctx: Context): Promise<User | null> {
-    console.log('SESSION', ctx.req.session)
-    console.log('COOKIES', ctx.req.cookies)
     const userId = ctx.req.session.userId
 
     if (userId) return User.findOne(userId)

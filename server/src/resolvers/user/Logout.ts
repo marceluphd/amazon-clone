@@ -8,7 +8,6 @@ export class LogoutResolver {
     return new Promise((res, rej) =>
       ctx.req.session.destroy((err) => {
         if (err) {
-          console.log(err)
           return rej(false)
         }
 
