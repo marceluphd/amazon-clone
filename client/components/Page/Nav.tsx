@@ -2,6 +2,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import { FETCH_CURRENT_USER_QUERY } from 'queries'
+import { SignoutButton } from 'components'
 
 const StyledNav = styled.div`
   display: flex;
@@ -35,6 +36,8 @@ const Nav = () => {
           <Link href="/account">
             <a>Account</a>
           </Link>
+
+          <SignoutButton />
         </>
       )}
 
